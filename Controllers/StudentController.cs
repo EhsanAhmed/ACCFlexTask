@@ -33,6 +33,7 @@ namespace ACCFlexTask.Controllers
         public IActionResult AddStudent()
         {
             Student student = new Student();
+            
             List<Courses> courseList = courseRepository.GetAll();
             ViewData["Courses"] = courseList;
             List<Teacher> TeacherList = eacherRepository.GetAll();
@@ -50,7 +51,8 @@ namespace ACCFlexTask.Controllers
             {
                 studentRepository.Insert(student);
             }
-            return View("Index");
+            List<Student> students = studentRepository.GetAll();
+            return View("Index", students);
         }
     }
 }

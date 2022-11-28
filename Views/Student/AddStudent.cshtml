@@ -2,24 +2,20 @@
 @{
    SelectList Classes=new SelectList (ViewBag.Classes,"Id","Name");
    SelectList Gender=new SelectList (ViewBag.Gender,"Id","GenderKind");
-   SelectList Teacher=new SelectList (ViewBag.Teacher,"Id","GenderKind");
+   SelectList Teacher=new SelectList (ViewBag.Teacher,"Id","Name");
 
 }
 
 <form method="post" asp-action="SaveStudent">
 
-
-     <div class="mb-3 row">
-    <label asp-for="Name"></label>
-    <div class="col-sm-10">
-      <input asp-for="Name">
-    </div>
+    <div class="mb-3 row">
+    <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+      <input asp-for="Name" class="form-control" >
   </div>
 
   <div class="mb-3 row">
-        <label asp-for="ClassID"></label>
+        <label asp-for="ClassID">Class</label>
         <select class="form-control" asp-for="ClassID" asp-items="Classes">
-            
         </select>
     </div>
 
@@ -31,21 +27,20 @@
         </select>
     </div>
   <div class="mb-3 row">
-    <label asp-for="BirthDate"></label>
-    <div class="col-sm-10">
-      <input asp-for="BirthDate">
-    </div>
+    <label asp-for="BirthDate" class="col-sm-2 col-form-label"></label>
+      <input asp-for="BirthDate" class="form-control">
+   
   </div>
 
   <div class="mb-3 row">
-    <label asp-for="Age"></label>
+    <label asp-for="Age" ></label>
     <div class="col-sm-10">
-      <input asp-for="Age">
+      <input asp-for="Age" class="form-control">
     </div>
   </div>
   
 
-<button id="add" class="btn btn-primary" onclick="Addrow()">Add New Course </button> <br />
+<button id="add" class="btn btn-primary" onclick="Addrow()">Add New Course </button> <br /><br />
 
 
  <table class="table" id="ggg" style="display:none">
@@ -55,7 +50,7 @@
       <th scope="col">Strat Date</th>
       <th scope="col">Dioration</th>
       <th scope="col">Teacher</th>
-      <th scope="col">Save</th>
+      @*<th scope="col">Save</th>*@
       <th scope="col">Delete</th>
 
 
@@ -72,11 +67,10 @@
 
       <td><div class="mb-3 row">
         <label asp-for="@item.teacher"></label>
-        <select class="form-control" asp-for="GenderID" asp-items="Gender">
-            
+        <select class="form-control"  asp-items="Teacher">
         </select>
     </div></td>
-    <td> <button id="Save" class="btn btn-primary" asp-action="" onclick="SaveData()">Save </button> <br /></td>
+    @*<td> <button id="Save" class="btn btn-primary" asp-action="" onclick="SaveData()">Save </button> <br /></td>*@
       <td>DDDDDDD</td>
       </tr>
      }
@@ -85,7 +79,7 @@
   </tbody>
 </table>
 
-<button value="submit" type="submit" class="btn btn-primary" >Create</button>
+<button value="submit" type="submit" class="btn btn-primary" >Create Student</button>
  </form>
 @section Scripts {
     <script src="~/bundles/jqueryval.js" type="text/javascript"> </script>
@@ -118,6 +112,8 @@
                     '<td>' +
                     '<input type="text" class="text-box single-line" name="AcidStables[' + counter + ']" value="" required="required" />' +
                     '</td>' +
+                    '<td>'+'<div class="mb-3 row">'+'<select class="form-control"  asp-items="@Teacher">'+
+                     '</select>'+'</div>'+'</td>'+
                     '<td>' +
                     '<button type="button" class="btn btn-primary" onclick="removeTr(' + counter + ');">Delete</button>' +
                     '</td>' +

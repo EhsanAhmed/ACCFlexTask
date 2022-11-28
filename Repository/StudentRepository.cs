@@ -14,7 +14,7 @@ namespace ACCFlexTask.Repository
         }
         public List<Student> GetAll()
         {
-            return context.Students.ToList();
+            return context.Students.Include("courses").ToList();
         }
 
         public Student GetById(int id)
