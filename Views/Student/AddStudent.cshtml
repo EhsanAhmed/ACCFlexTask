@@ -1,0 +1,132 @@
+﻿@model Student
+@{
+   SelectList Classes=new SelectList (ViewBag.Classes,"Id","Name");
+   SelectList Gender=new SelectList (ViewBag.Gender,"Id","GenderKind");
+   SelectList Teacher=new SelectList (ViewBag.Teacher,"Id","GenderKind");
+
+}
+
+<form method="post" asp-action="SaveStudent">
+
+
+     <div class="mb-3 row">
+    <label asp-for="Name"></label>
+    <div class="col-sm-10">
+      <input asp-for="Name">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+        <label asp-for="ClassID"></label>
+        <select class="form-control" asp-for="ClassID" asp-items="Classes">
+            
+        </select>
+    </div>
+
+
+  <div class="mb-3 row">
+        <label asp-for="GenderID"></label>
+        <select class="form-control" asp-for="GenderID" asp-items="Gender">
+            
+        </select>
+    </div>
+  <div class="mb-3 row">
+    <label asp-for="BirthDate"></label>
+    <div class="col-sm-10">
+      <input asp-for="BirthDate">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label asp-for="Age"></label>
+    <div class="col-sm-10">
+      <input asp-for="Age">
+    </div>
+  </div>
+  
+
+<button id="add" class="btn btn-primary" onclick="Addrow()">Add New Course </button> <br />
+
+
+ <table class="table" id="ggg" style="display:none">
+  <thead>
+    <tr>
+      <th scope="col">Course Name</th>
+      <th scope="col">Strat Date</th>
+      <th scope="col">Dioration</th>
+      <th scope="col">Teacher</th>
+      <th scope="col">Save</th>
+      <th scope="col">Delete</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+     @if(Model.courses!=null){
+     @foreach (var item in Model.courses)
+     {
+      <tr>
+      <th scope="row">@item.Name</th>
+      <td>@item.StartDate</td>
+      <td>@item.Diotation</td>
+
+      <td><div class="mb-3 row">
+        <label asp-for="@item.teacher"></label>
+        <select class="form-control" asp-for="GenderID" asp-items="Gender">
+            
+        </select>
+    </div></td>
+    <td> <button id="Save" class="btn btn-primary" asp-action="" onclick="SaveData()">Save </button> <br /></td>
+      <td>DDDDDDD</td>
+      </tr>
+     }
+     }
+    
+  </tbody>
+</table>
+
+<button value="submit" type="submit" class="btn btn-primary" >Create</button>
+ </form>
+@section Scripts {
+    <script src="~/bundles/jqueryval.js" type="text/javascript"> </script>
+
+    <script>
+        
+       function Addrow()
+       {
+           console.log("sdfsdfs");
+            var x = document.getElementById("ggg");
+                  if (x.style.display === "none") {
+                    x.style.display = "block";   } 
+       }
+      function SaveData()
+      {
+
+      }
+        var counter = 1;
+         $(function () {
+
+            $('#add').click(function () {
+               
+
+                $('<tr id="tablerow' + counter + '"><td>' +
+                    '<input type="text" class="text-box single-line" name="ClientSampleID[' + counter + ']" value="" required="required" />' +
+                    '</td>' +
+                    '<td>' +
+                    '<input type="text" class="text-box single-line" name="AdditionalComments[' + counter + ']" value="" required="required" />' +
+                    '</td>' +
+                    '<td>' +
+                    '<input type="text" class="text-box single-line" name="AcidStables[' + counter + ']" value="" required="required" />' +
+                    '</td>' +
+                    '<td>' +
+                    '<button type="button" class="btn btn-primary" onclick="removeTr(' + counter + ');">Delete</button>' +
+                    '</td>' +
+                    '</tr>').appendTo('#ggg');
+                counter++;
+                return false;
+            });
+        });
+   
+         </script>
+    }
+
